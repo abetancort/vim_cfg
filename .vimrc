@@ -48,7 +48,7 @@ set exrc
 set secure
 set shell=/bin/bash 
 
-" Default indentation without hard tabs 
+" Default indentation without hard tabs for c 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -73,11 +73,14 @@ set ignorecase
 set nocompatible " from Moderm Vim (ebook) Pg. 18
 set autowrite "Autowrite on buffer changes
 set foldmethod=syntax "Autofold code
+" Open close folds with the space key
 nnoremap <space> za
-set foldcolumn=4
-set foldnestmax=10
-set foldminlines=3
-au FileType make set noexpandtab | set tabstop=8 "Real tabs for makefiles
+set foldcolumn=4 "Leave four char for the fold colum to show folds
+set foldnestmax=10 
+set foldminlines=3 "Don't fold if the syntax fold has 3 lines.
+
+" Indentation for makefiles (real tabs)
+au FileType make set noexpandtab | set tabstop=8 
 
 " simplle autocomplete mucomplete plugin
 set completeopt+=menuone
@@ -85,9 +88,10 @@ set completeopt+=noinsert
 set shortmess+=c
 set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 1 
 
 set makeprg=gcc\ -Wall\ -W\ -pedantic\ -ansi\ -std=c99\ -O\ %\ \$* 
-au BufWritePost <buffer> make
+au BufWritePost *.c make
 
 " From answer by Tom Hale in StackExchange  
 " https://superuser.com/questions/286985/reload-vimrc-in-vim-without-restart
