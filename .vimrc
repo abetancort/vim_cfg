@@ -77,7 +77,7 @@ set foldmethod=syntax "Autofold code
 nnoremap <space> za
 set foldcolumn=4 "Leave four char for the fold colum to show folds
 set foldnestmax=10 
-set foldminlines=3 "Don't fold if the syntax fold has 3 lines.
+set foldminlines=2 "Don't fold if the syntax fold has 2 lines.
 
 " Indentation for makefiles (real tabs)
 au FileType make set noexpandtab | set tabstop=8 
@@ -90,8 +90,17 @@ set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 1 
 
+"Redirect make to gcc and set auto compile after saving buffer
 set makeprg=gcc\ -Wall\ -W\ -pedantic\ -ansi\ -std=c99\ -O\ %\ \$* 
 au BufWritePost *.c make
+
+" Change vim default location where ancilliary files are saved to
+" avoid sporious files in working directory. // at the end of path
+" means that file names will includes the  path of original file.
+" Source: https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f
+set backupdir =~/dev/tmp// " Option only available in Vim.
+set directory =~/dev/tmp// " Location of swp files (Vim and Vi). 
+set undodir =~/dev/tmp// " Option only available in Vim.
 
 " From answer by Tom Hale in StackExchange  
 " https://superuser.com/questions/286985/reload-vimrc-in-vim-without-restart
